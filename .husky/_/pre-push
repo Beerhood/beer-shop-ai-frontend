@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+# run full lint
+npx eslint "src/**/*.{ts,tsx,js,jsx}" 
+
+# run tests
+npm run test
