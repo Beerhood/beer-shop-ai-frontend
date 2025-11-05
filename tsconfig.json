@@ -4,6 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -15,6 +16,8 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
+    "strictPropertyInitialization": false,
+    "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
       "src/*": ["src/*"]
