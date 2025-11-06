@@ -14,7 +14,6 @@ import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app/app.routes';
 import { HttpConfigInterceptor } from './app/interceptors/httpConfig.interceptor';
-import Aura from '@primeuix/themes/aura';
 import { AmberPreset } from './styles/presets/preset.amber';
 
 if (environment.production) {
