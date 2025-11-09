@@ -5,10 +5,10 @@ export interface IProduct {
   name: string;
   description: string;
   type: IType;
-  price: string;
+  price: number;
   productType: ProductTypes;
-  country: string;
-  ABV: string;
+  country?: string;
+  ABV?: number;
 }
 
 export interface IProductsApiResponse {
