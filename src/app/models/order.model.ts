@@ -11,7 +11,7 @@ export interface IOrder {
 
 export interface IOrdersApiResponse {
   items: IOrder[];
-  total_count: number;
+  totalCount: number;
 }
 
 export interface IOrderApiResponse extends IOrder {

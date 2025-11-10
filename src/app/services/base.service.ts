@@ -20,7 +20,7 @@ export interface IListParams {
 
 export interface IListApiResponse<T> {
   items: T[];
-  total_count: number;
+  totalCount: number;
 }
 
 export interface ISingleApiResponse<T> {

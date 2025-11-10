@@ -11,7 +11,7 @@ export interface IUser {
 
 export interface IUsersApiResponse {
   items: IUser[];
-  total_count: number;
+  totalCount: number;
 }
 
 export interface IUserApiResponse extends IUser {

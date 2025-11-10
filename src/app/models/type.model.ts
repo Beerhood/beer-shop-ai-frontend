@@ -5,7 +5,7 @@ export interface IType {
 
 export interface ITypesApiResponse {
   items: IType[];
-  total_count: number;
+  totalCount: number;
 }
 
 export interface ITypeApiResponse extends IType {

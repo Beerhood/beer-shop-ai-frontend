@@ -13,7 +13,7 @@ export interface IProduct {
 
 export interface IProductsApiResponse {
   items: IProduct[];
-  total_count: number;
+  totalCount: number;
 }
 
 export interface IProductApiResponse extends IProduct {
