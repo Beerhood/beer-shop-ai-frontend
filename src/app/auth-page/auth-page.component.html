@@ -1,0 +1,23 @@
+<div class="flex justify-center items-center min-h-screen flex-col">
+  <div class="pb-10">
+    <div class="flex justify-center p-4">
+      <p class="text-9xl">🍺</p>
+    </div>
+    <h1 class="font-extrabold text-7xl">Beerhood</h1>
+  </div>
+  <p-card [style]="{ width: '50%', padding: '1.5rem' }">
+    <ng-template #header>
+      <h1 class="justify-self-center font-bold text-2xl">Authorize with</h1>
+    </ng-template>
+    <div class="flex justify-center">
+      <p-button
+        size="large"
+        label="Google account"
+        icon="pi pi-google"
+        severity="contrast"
+        [outlined]="true"
+        (onClick)="SignInWithGoogle()"
+      />
+    </div>
+  </p-card>
+</div>
