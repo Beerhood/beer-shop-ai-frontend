@@ -1,11 +1,12 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MenubarModule } from 'primeng/menubar';
-import { MenuItem } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
+import { Subscription, filter } from 'rxjs';
+import { ToolbarRoutes } from '../models';
 
 @Component({
   selector: 'app-layout',
@@ -14,23 +15,43 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './layout.scss',
 })
 export class Layout implements OnInit {
-  items: MenuItem[] | undefined;
+  items = [
+    {
+      label: 'Home',
+      icon: 'pi pi-home',
+      routerLink: '/home',
+    },
+    {
+      label: 'Menu',
+      icon: 'pi pi-clipboard',
+      routerLink: '/menu',
+    },
+  ];
   icon = signal<string>('pi pi-sun');
+  private readonly router = inject(Router);
+  protected showToolbar: boolean = false;
+  private navigationSubscription: Subscription | undefined;
 
   ngOnInit() {
-    this.items = [
-      {
-        label: 'Home',
-        icon: 'pi pi-home',
-        routerLink: '/home',
-      },
-      {
-        label: 'Menu',
-        icon: 'pi pi-clipboard',
-        routerLink: '/menu',
-      },
-    ];
+    this.DisplayToolbar();
     this.applyTheme();
+  }
+
+  DisplayToolbar() {
+    this.navigationSubscription = this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const currentRoute = this.router.url.split('?')[0];
+        const toolbarRoutes = Object.values(ToolbarRoutes);
+        const toolbarRoutesRexExp = new RegExp(`/${toolbarRoutes.join('|')}/*`);
+        this.showToolbar = toolbarRoutesRexExp.test(currentRoute);
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   toggleDarkMode() {
