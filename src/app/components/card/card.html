@@ -1,9 +1,9 @@
-<p-card [style]="{ position: 'relative', width: '25rem', height: '35rem', overflow: 'hidden'}">
+<p-card [style]="{ position: 'relative', width: '25rem', height: '35rem', overflow: 'hidden', display: 'block'}">
   <ng-template pTemplate="header">
     <img
       alt="Card"
       class="w-full h-48 object-cover"
-      src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+      [src]="imageValue"
     />
   </ng-template>
 
@@ -15,16 +15,14 @@
     {{ subtitleValue }}
   </ng-template>
 
-  <!-- content: keep room for the absolute footer -->
   <div class="h-full overflow-hidden pb-20">
     <p class="overflow-hidden leading-6 line-clamp-7">
       {{ descriptionValue }}
     </p>
   </div>
 
-  <!-- footer pinned to bottom of the card -->
   <ng-template pTemplate="footer">
-    <div class="absolute bottom-0 left-0 right-0 p-4 bg-white/70 dark:bg-black/40 backdrop-blur">
+    <div class="absolute bottom-0 left-0 right-0 p-4 backdrop-blur">
       <div class="flex gap-3">
         <p-button
           label="Cancel"

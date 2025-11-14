@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './card.scss',
 })
 export class Card {
+  @Input() imageValue: string = ''
   @Input() titleValue: string = '';
   @Input() subtitleValue: string = '';
   @Input() descriptionValue: string = ''
