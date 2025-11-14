@@ -5,10 +5,10 @@
         <p class="text-4xl">🍺</p>
       </ng-template>
       <ng-template #end>
-        <div class="card flex gap-4 justify-center">
+        <div class="card flex gap-4 justify-center items-center">
           <input type="text" pInputText placeholder="Search" class="w-64" />
           <p-button
-            [icon]="icon()"
+            [icon]="themeIcon()"
             variant="outlined"
             severity="contrast"
             (onClick)="toggleDarkMode()"
@@ -16,6 +16,7 @@
           <a href="/order">
             <p-button icon="pi pi-shopping-cart" variant="outlined" severity="contrast" />
           </a>
+          <p-avatar [label]="userAvatar()" class="mr-2" size="large" [style]="{ 'background-color': 'var(--p-surface-400)', color: 'var(--p-primary-100)' }" />
         </div>
       </ng-template>
     </p-menubar>

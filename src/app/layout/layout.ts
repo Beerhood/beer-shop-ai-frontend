@@ -7,10 +7,20 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { Subscription, filter } from 'rxjs';
 import { ToolbarRoutes } from '../models';
+import { AvatarModule } from 'primeng/avatar';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [MenubarModule, BadgeModule, InputTextModule, CommonModule, ButtonModule, RouterOutlet],
+  imports: [
+    MenubarModule,
+    BadgeModule,
+    InputTextModule,
+    CommonModule,
+    ButtonModule,
+    AvatarModule,
+    RouterOutlet,
+  ],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
@@ -27,14 +37,22 @@ export class Layout implements OnInit {
       routerLink: '/menu',
     },
   ];
-  icon = signal<string>('pi pi-sun');
+  themeIcon = signal<string>('pi pi-sun');
+  userAvatar = signal<string>('U');
   private readonly router = inject(Router);
   protected showToolbar: boolean = false;
   private navigationSubscription: Subscription | undefined;
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit() {
     this.DisplayToolbar();
     this.applyTheme();
+    this.authService.user$.subscribe((user) => {
+      this.userAvatar.set(
+        `${user?.firstName?.[0] ?? ''}${user?.lastName?.[0] ?? 'U'}`.toUpperCase(),
+      );
+    });
   }
 
   DisplayToolbar() {
@@ -60,10 +78,10 @@ export class Layout implements OnInit {
     element?.classList.toggle('dark-theme', !isDarkMode);
     localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
 
-    if (this.icon() === 'pi pi-sun') {
-      this.icon.set('pi pi-moon');
+    if (this.themeIcon() === 'pi pi-sun') {
+      this.themeIcon.set('pi pi-moon');
     } else {
-      this.icon.set('pi pi-sun');
+      this.themeIcon.set('pi pi-sun');
     }
   }
 
@@ -74,6 +92,6 @@ export class Layout implements OnInit {
 
     element?.classList.toggle('dark-theme', isDarkMode);
 
-    this.icon.set(isDarkMode ? 'pi pi-moon' : 'pi pi-sun');
+    this.themeIcon.set(isDarkMode ? 'pi pi-moon' : 'pi pi-sun');
   }
 }
