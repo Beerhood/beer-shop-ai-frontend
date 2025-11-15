@@ -1,6 +1,9 @@
+import { ProductTypes } from "./";
+
 export interface Type {
   _id: string;
   name: string;
+  productType: ProductTypes;
 }
 
 export interface TypesApiResponse {

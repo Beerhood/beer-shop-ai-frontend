@@ -2,13 +2,18 @@ import { Type, ProductTypes } from './';
 
 export interface Product {
   _id: string;
+  image: string;
   name: string;
   description: string;
   type: Type;
   price: number;
   productType: ProductTypes;
-  country?: string;
-  ABV?: number;
+  details: {
+    country?: string;
+    ABV?: number; // Alcohol By Volume, measure of the amount of pure alcohol
+    IBU?: number; // International Bitterness Units, measure of a beer's bitterness
+    OG?: number; // Original Gravity, measure of the density of wort before yeast is added for fermentation
+  };
 }
 
 export interface ProductsApiResponse {
