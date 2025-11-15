@@ -1,4 +1,4 @@
-import { IUser } from "src/app/models";
+import { User } from "src/app/models";
 
 export interface HttpSuccessResponse {
   data: any;
@@ -14,5 +14,5 @@ export interface HttpErrorResponse {
 export interface RefreshTokenResponse {
   accessToken: string;
   refreshToken: string;
-  user: IUser;
+  user: User;
 }

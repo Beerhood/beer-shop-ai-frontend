@@ -1,6 +1,6 @@
 import {UserRoles} from './';
 
-export interface IUser {
+export interface User {
   _id: string;
   email: string;
   firstName: string;
@@ -9,12 +9,12 @@ export interface IUser {
   birthDate: Date
 }
 
-export interface IUsersApiResponse {
-  items: IUser[];
+export interface UsersApiResponse {
+  items: User[];
   totalCount: number;
 }
 
-export interface IUserApiResponse extends IUser {
+export interface UserApiResponse extends User {
   createdAt: Date;
   updatedAt: Date;
 }

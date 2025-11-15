@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, finalize, Observable, of, switchMap, tap, throwError } from 'rxjs';
-import { IUser, UserRoles } from '../models';
+import { User, UserRoles } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SnackbarService } from './snackbar.service';
@@ -11,7 +11,7 @@ import { RefreshTokenResponse } from '../interceptors/models/interceptor.interfa
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject = new BehaviorSubject<IUser | null>(null);
+  private userSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
 
   private accessTokenSubject = new BehaviorSubject<string | null>(null);
@@ -24,7 +24,7 @@ export class AuthService {
     private router: Router,
   ) {}
 
-  get currentUser(): IUser | null {
+  get currentUser(): User | null {
     return this.userSubject.value;
   }
   get accessToken(): string | null {

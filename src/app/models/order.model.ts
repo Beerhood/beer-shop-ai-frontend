@@ -1,20 +1,20 @@
-import { IUser, IProduct, OrderStatuses } from './';
+import { User, Product, OrderStatuses } from './';
 
-export interface IOrder {
+export interface Order {
   _id: string;
-  user: IUser;
-  products: IProduct[];
+  user: User;
+  products: Product[];
   address: string;
   totalPrice: number;
   status: OrderStatuses;
 }
 
-export interface IOrdersApiResponse {
-  items: IOrder[];
+export interface OrdersApiResponse {
+  items: Order[];
   totalCount: number;
 }
 
-export interface IOrderApiResponse extends IOrder {
+export interface OrderApiResponse extends Order {
   createdAt: Date;
   updatedAt: Date;
 }

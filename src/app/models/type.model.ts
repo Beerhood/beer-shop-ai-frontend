@@ -1,14 +1,14 @@
-export interface IType {
+export interface Type {
   _id: string;
   name: string;
 }
 
-export interface ITypesApiResponse {
-  items: IType[];
+export interface TypesApiResponse {
+  items: Type[];
   totalCount: number;
 }
 
-export interface ITypeApiResponse extends IType {
+export interface TypeApiResponse extends Type {
   createdAt: Date;
   updatedAt: Date;
 }
