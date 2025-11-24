@@ -2,8 +2,8 @@ import { Type, ProductTypes } from './';
 
 export interface Product {
   _id: string;
+  title: string;
   image: string;
-  name: string;
   description: string;
   type: Type;
   price: number;
