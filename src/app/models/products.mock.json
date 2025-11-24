@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "name": "Garage Hardcore taste Cherry & More 0,5 l",
+      "title": "Garage Hardcore taste Cherry & More 0,5 l",
       "image": "https://picsum.photos/350/168",
       "description": "Seth & Riley's Garage is a new line of hard drinks with refreshing tastes, which have been inspired by old-school American recipes.Seth & Riley`s Garage Hardcore taste Cherry & More is a real drive. More alcohol, more taste, more mood for fun with friends. It has a refreshing, malty, cherry flavor combined with light notes of lime, with a slight hop bitterness. Pleasant light sourness of cherry berries combined with a light sweet taste. Best served chilled. Produced in package format: CAN 0,5L; Glass Bottle 0,44L; PET 0,9L.",
       "type": {
@@ -14,7 +14,7 @@
       }
     },
     {
-      "name": "Guinness Draught 0,5 l",
+      "title": "Guinness Draught 0,5 l",
       "image": "https://picsum.photos/350/168",
       "description": "Guinness Draught is the main brew of the Guinness brand. When poured into a glass, it produces the unique creamy foam, that earned this beer worldwide admiration. In Ukraine, Guinness Draught is sold both in kegs and in cans. Produced in package format: CAN 0,44L; KEG 30L.",
       "type": {
@@ -28,7 +28,7 @@
       }
     },
     {
-      "name": "Lvivske Rizdvyane 0,5 l",
+      "title": "Lvivske Rizdvyane 0,5 l",
       "image": "https://picsum.photos/350/168",
       "description": "'Lvivske Rizdvyane' is a dark beer with a caramel-spicy aroma and a hint of Christmas spices, which is brewed for the winter holidays. According to legend, Lviv brewers have long been treating guests who came to sing carols during holidays. This beer is available only in winter. Produced in package format: Glass Bottle 0,5L; CAN 0,48L; PET 1,12L; KEG 30L.",
       "type": {
@@ -39,11 +39,11 @@
       "details": {
         "country": "Ukraine",
         "ABV": 4.2,
-        "flavour": "Caramel-spicy"
+        "OG": 1.01
       }
     },
     {
-      "name": "LAYS Crab Flavored Potato Chips 120 g",
+      "title": "LAYS Crab Flavored Potato Chips 120 g",
       "image": "https://picsum.photos/350/168",
       "description": "Delicate aroma of crab meat, quiet splashing of the sea ... Loud crunch of Lay's chips with crab, the best picnic just where you'll open the pack!",
       "type": {
@@ -56,7 +56,7 @@
       }
     },
     {
-      "name": "Chipster's Borscht potato chips 100 g",
+      "title": "Chipster's Borscht potato chips 100 g",
       "image": "https://picsum.photos/350/168",
       "description": "Chipster's Borscht potato chips – is a tasty and aromatic snack designed for a quick snack or addition to drinks. Ideal for parties, travel or home relaxation, creating a cozy atmosphere thanks to the unique taste of borscht. We present to you Chipster's chips with the taste of borscht –, the perfect combination of crispy texture and iconic Ukrainian aroma. These chips are a great choice for those who appreciate classic flavors with a modern twist. Thanks to their rich taste and perfect crispness, they promise to become indispensable treats on your table. A deep and rich aroma of borscht with notes of beets, tomatoes and light acidity, which will satisfy lovers of traditional preferences. Perfectly crispy, creating unique pleasure with every bite. Great for evening snacks, meetings with friends or as a snack for drinks. Perfectly combined with various sauces and dipas, and can also be used in its pure form to fully enjoy their rich taste. Chipster's chips with the taste of borscht – are the embodiment of the classic Ukrainian taste in a modern version, which promises to become a favorite snack for everyone.",
       "type": {
@@ -65,8 +65,7 @@
       "price": 55.0,
       "productType": "Snack",
       "details": {
-        "country": "Ukraine",
-        "flavor": "Borscht"
+        "country": "Ukraine"
       }
     }
   ],

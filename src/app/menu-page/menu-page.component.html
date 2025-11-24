@@ -5,7 +5,7 @@
     @for (product of products.items; track product) {
       <app-card
         [imageValue]="product.image"
-        [titleValue]="product.name"
+        [titleValue]="product.title"
         [subtitleValue]="product.type.name + (product.details.country ? ', ' + product.details.country : '')"
         [descriptionValue]="product.description"
       />

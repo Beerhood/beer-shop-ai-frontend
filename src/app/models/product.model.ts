@@ -2,7 +2,7 @@ import { IType, ProductTypes } from './';
 
 export interface IProduct {
   _id: string;
-  name: string;
+  title: string;
   image: string;
   description: string;
   type: IType;
