@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IProduct } from 'src/app/models';
 
 @Component({
   selector: 'app-card',
@@ -9,9 +11,13 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './card.scss',
 })
 export class Card {
-  @Input() imageValue: string = ''
-  @Input() titleValue: string = '';
-  @Input() subtitleValue: string = '';
-  @Input() descriptionValue: string = ''
+  @Input() product: IProduct;
 
+  constructor(
+    private readonly router: Router,
+  ) {}
+
+  openProductModal() {
+    this.router.navigate(['menu', this.product._id]);
+  }
 }
