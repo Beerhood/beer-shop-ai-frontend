@@ -1,0 +1,53 @@
+<p-dialog
+  [header]="product?.title"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '90vh': '75vw', '575px': '90vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="true"
+  [dismissableMask]="true"
+  [closeOnEscape]="true"
+  (onHide)="onCloseDialog()"
+>
+  <ng-template #content>
+    <p-image
+      [src]="product?.image"
+      [alt]="product?.title + ' image'"
+      width="100%"
+      imageClass="rounded-md"
+    />
+    <p-fieldset legend="Description" [toggleable]="true">
+      <p class="m-0">
+        {{ product?.description }}
+      </p>
+    </p-fieldset>
+  </ng-template>
+  <ng-template #footer>
+    <div class="bottom-0 left-0 right-0 grid grid-cols-5 gap-4">
+      <p-inputnumber
+        [(ngModel)]="inputValue"
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        mode="decimal"
+        [inputStyle]="{ width: '100%' }"
+        [min]="0"
+        [max]="99999"
+        class="col-span-1 col-start-3"
+      >
+        <ng-template #incrementbuttonicon>
+          <span class="pi pi-plus"></span>
+        </ng-template>
+        <ng-template #decrementbuttonicon>
+          <span class="pi pi-minus"></span>
+        </ng-template>
+      </p-inputnumber>
+
+      <p-button label="Add to cart" class="flex-1 col-span-2" styleClass="w-full" />
+    </div>
+  </ng-template>
+</p-dialog>
