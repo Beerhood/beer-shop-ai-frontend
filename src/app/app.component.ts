@@ -5,7 +5,7 @@ import { Layout } from './layout/layout';
 @Component({
   selector: 'app-root',
   imports: [ToastModule, Layout],
-  template: `<p-toast position="bottom-center" /><app-layout />`,
+  template: `<p-toast position="top-right" /><app-layout />`,
   standalone: true,
 })
 export class AppComponent {}
