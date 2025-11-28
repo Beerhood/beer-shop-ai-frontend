@@ -1,0 +1,40 @@
+<p-card
+  [style]="{
+    position: 'relative',
+    width: '25rem',
+    height: '27.5rem',
+    overflow: 'hidden',
+    display: 'block',
+  }"
+>
+  <ng-template #header>
+    <img alt="Card" class="w-full h-48 object-cover" [src]="product.image" />
+  </ng-template>
+
+  <ng-template #title>
+    {{ product.title }}
+  </ng-template>
+
+  <ng-template #subtitle>
+    {{ product.type.name + (product.country ? ', ' + product.country : '') }}
+  </ng-template>
+
+  <ng-template #footer>
+    <div class="absolute bottom-0 left-0 right-0">
+      <h2 class="px-4 text-2xl font-normal">
+        {{ product.price.toFixed(2) }} ₴
+      </h2>
+      <div class="p-4 grid grid-cols-2 gap-4">
+        <p-button
+          label="Info"
+          severity="secondary"
+          class="flex-1"
+          [outlined]="true"
+          styleClass="w-full"
+          (onClick)="openProductModal()"
+        />
+        <p-button label="Add to cart" class="flex-1" styleClass="w-full" />
+      </div>
+    </div>
+  </ng-template>
+</p-card>

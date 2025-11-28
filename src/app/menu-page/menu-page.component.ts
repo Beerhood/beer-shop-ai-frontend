@@ -1,8 +1,92 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { Card } from '../components/card/card';
+import { ApiError, Product, ProductApiResponse, ProductsApiResponse } from '../models';
+import { ProductService } from '../services/product.service';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProductModal } from '../components/product-modal/product-modal';
+import { SnackbarService } from '../services/snackbar.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-menu-page.component',
-  imports: [],
-  template: `<p>menu-page works!</p>`,
+  imports: [Card, PaginatorModule, ProductModal],
+  templateUrl: './menu-page.component.html',
+  styleUrl: './menu-page.component.scss',
 })
-export class MenuPage {}
+export class MenuPage implements OnInit {
+  first: number = 0;
+  rows: number = 3;
+  products = signal<Product[]>([]);
+  dialogVisible = false;
+  selectedProduct = signal<Product | null>(null);
+  constructor(
+    private productService: ProductService,
+    private snackBar: SnackbarService,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+  ) {}
+
+  ngOnInit(): void {
+    this.getProducts().subscribe({
+      next: (response: ProductsApiResponse) => {
+        this.products.set(response.items);
+      },
+      error: (error: ApiError) => {
+        this.snackBar.showError(error.statusCode + ': ' + error.message);
+        console.error(error);
+      },
+    });
+
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+
+      if (id) {
+        void this.openProductById(id);
+      } else {
+        this.dialogVisible = false;
+      }
+    });
+  }
+
+  async openProductById(id: string): Promise<void> {
+    try {
+      const response: ProductApiResponse = await firstValueFrom(this.getProductById(id));
+
+      const product = response as Product;
+
+      if (!product) {
+        this.dialogVisible = false;
+        this.selectedProduct.set(null);
+        this.router.navigate(['/menu']);
+        this.snackBar.showError('Product not found');
+        return;
+      }
+
+      this.selectedProduct.set(product);
+      this.dialogVisible = true;
+    } catch (error: any) {
+      const apiError = error as ApiError;
+      this.dialogVisible = false;
+      this.selectedProduct.set(null);
+      this.snackBar.showError(
+        apiError?.statusCode + ': ' + apiError?.message || 'Product load failed',
+      );
+      console.error(error);
+    }
+  }
+
+  onPageChange(event: PaginatorState) {
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? 10;
+  }
+
+  getProducts() {
+    return this.productService.getList();
+    //TODO: add pagination & filter field overloads
+  }
+
+  getProductById(id: string) {
+    return this.productService.getById(id);
+  }
+}

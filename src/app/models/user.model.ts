@@ -1,4 +1,4 @@
-import {UserRoles} from './';
+import { UserRoles } from './';
 
 export interface User {
   _id: string;
@@ -6,7 +6,8 @@ export interface User {
   firstName: string;
   lastName: string;
   role: UserRoles;
-  birthDate: Date
+  birthDate: Date;
+  address?: string;
 }
 
 export interface UsersApiResponse {

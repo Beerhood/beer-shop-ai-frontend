@@ -14,3 +14,9 @@ export enum OrderStatuses {
   SHIPPED = 'Shipped',
   COMPLETED = 'Completed',
 }
+
+export enum ToolbarRoutes {
+  HOME = 'home',
+  MENU = 'menu',
+  ORDER = 'order'
+}

@@ -4,7 +4,6 @@ import Aura from '@primeuix/themes/aura';
 export const AmberPreset = definePreset(Aura, {
   semantic: {
     primary: {
-      // choose your amber palette values
       50: '{amber.50}',
       100: '{amber.100}',
       200: '{amber.200}',

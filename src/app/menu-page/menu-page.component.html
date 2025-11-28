@@ -1,0 +1,19 @@
+<div>
+  <div
+    class="grid xl:grid-cols-3 grid-cols-subgrid sm:grid-cols-1 md:grid-cols-2 gap-y-4 justify-items-center justify-around p-4"
+  >
+    @for (product of products(); track product) {
+      <app-card [product]="product" />
+    }
+  </div>
+  <div class="card flex justify-center">
+    <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="120"
+    [rowsPerPageOptions]="[3, 12, 24]"
+    />
+  </div>
+  <app-product-modal [visible]="dialogVisible" [product]="selectedProduct()"> </app-product-modal>
+</div>
