@@ -1,11 +1,11 @@
-import { IType, ProductTypes } from './';
+import { Type, ProductTypes } from './';
 
-export interface IProduct {
+export interface Product {
   _id: string;
   title: string;
   image: string;
   description: string;
-  type: IType;
+  type: Type;
   price: number;
   productType: ProductTypes;
   brand: string;
@@ -19,12 +19,12 @@ export interface IProduct {
   };
 }
 
-export interface IProductsApiResponse {
-  items: IProduct[];
+export interface ProductsApiResponse {
+  items: Product[];
   totalCount: number;
 }
 
-export interface IProductApiResponse extends IProduct {
+export interface ProductApiResponse extends Product {
   createdAt: Date;
   updatedAt: Date;
 }

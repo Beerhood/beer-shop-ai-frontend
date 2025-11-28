@@ -1,14 +1,17 @@
-export interface IType {
+import { ProductTypes } from "./";
+
+export interface Type {
   _id: string;
   name: string;
+  productType: ProductTypes;
 }
 
-export interface ITypesApiResponse {
-  items: IType[];
+export interface TypesApiResponse {
+  items: Type[];
   totalCount: number;
 }
 
-export interface ITypeApiResponse extends IType {
+export interface TypeApiResponse extends Type {
   createdAt: Date;
   updatedAt: Date;
 }
