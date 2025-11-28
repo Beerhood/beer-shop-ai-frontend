@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Card } from '../components/card/card';
 import * as MOCK from 'src/app/models/products.mock.json';
-import { IProduct, IProductsApiResponse } from '../models';
+import { ApiError, IProduct, IProductApiResponse, IProductsApiResponse } from '../models';
 import { ProductService } from '../services/product.service';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductModal } from '../components/product-modal/product-modal';
 import { SnackbarService } from '../services/snackbar.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-menu-page.component',
@@ -17,9 +18,9 @@ import { SnackbarService } from '../services/snackbar.service';
 export class MenuPage implements OnInit {
   first: number = 0;
   rows: number = 3;
-  products = <IProductsApiResponse>MOCK; //MOCK for now, rewrite using signal() in future
+  products = signal<IProduct[]>([]);
   dialogVisible = false;
-  selectedProduct: IProduct;
+  selectedProduct = signal<IProduct | null>(null);
   constructor(
     private productService: ProductService,
     private snackBar: SnackbarService,
@@ -28,29 +29,52 @@ export class MenuPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getProducts().subscribe({
+      next: (response: IProductsApiResponse) => {
+        this.products.set(response.items);
+      },
+      error: (error: ApiError) => {
+        this.snackBar.showError(error.statusCode + ': ' + error.message);
+        console.error(error);
+      },
+    });
+
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
 
       if (id) {
-        this.openProductById(id);
+        void this.openProductById(id);
       } else {
         this.dialogVisible = false;
       }
     });
   }
 
-  openProductById(id: string) {
-    const product = this.products.items.find((p) => p._id === id);
+  async openProductById(id: string): Promise<void> {
+    try {
+      const response: IProductApiResponse = await firstValueFrom(this.getProductById(id));
 
-    if (!product) {
+      const product = response as IProduct;
+
+      if (!product) {
+        this.dialogVisible = false;
+        this.selectedProduct.set(null);
+        this.router.navigate(['/menu']);
+        this.snackBar.showError('Product not found');
+        return;
+      }
+
+      this.selectedProduct.set(product);
+      this.dialogVisible = true;
+    } catch (error: any) {
+      const apiError = error as ApiError;
       this.dialogVisible = false;
-      this.router.navigate(['menu']);
-      this.snackBar.showError('Product not found');
-
-      return;
+      this.selectedProduct.set(null);
+      this.snackBar.showError(
+        apiError?.statusCode + ': ' + apiError?.message || 'Product load failed',
+      );
+      console.error(error);
     }
-    this.selectedProduct = product;
-    this.dialogVisible = true;
   }
 
   onPageChange(event: PaginatorState) {
@@ -58,7 +82,12 @@ export class MenuPage implements OnInit {
     this.rows = event.rows ?? 10;
   }
 
-  getProducts(): void {
-    this.productService.getList(); //TODO: add pagination & filter field overloads
+  getProducts() {
+    return this.productService.getList();
+    //TODO: add pagination & filter field overloads
+  }
+
+  getProductById(id: string) {
+    return this.productService.getById(id);
   }
 }

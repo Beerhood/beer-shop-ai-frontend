@@ -18,14 +18,43 @@
       width="100%"
       imageClass="rounded-md"
     />
-    <p-fieldset legend="Description" [toggleable]="true">
-      <p class="m-0">
+    <p-fieldset legend="Description" [toggleable]="true" [style]="{ margin: '1rem 0 0 0' }">
+      <p class="py-4">
         {{ product?.description }}
       </p>
     </p-fieldset>
+    <p-fieldset legend="Details" [toggleable]="true" [style]="{ margin: '1rem 0 0 0' }">
+      <div class="grid grid-cols-3 gap-x-8 py-4">
+        <div class="col-1">
+          <p-chip label="Brand" class="m-0" />
+        </div>
+        <div class="col-span-2">
+          <p-chip [label]="product?.brand" class="m-0" />
+        </div>
+        <p-divider class="m-0 row col-span-2" />
+        <div class="col-1">
+          <p-chip label="Country" class="m-0" />
+        </div>
+        <div class="col-span-2">
+          <p-chip [label]="product?.country" class="m-0" />
+        </div>
+        @for (field of productDetails(); track field) {
+          @if (field) {
+            <p-divider class="m-0 row col-span-2" />
+            <div class="col-1">
+              <p-chip [label]="field[0]" class="m-0" />
+            </div>
+            <div class="col-span-2">
+              <p-chip [label]="field[1].toString()" class="m-0 col-1 col-start-2" />
+            </div>
+          }
+        }
+      </div>
+    </p-fieldset>
   </ng-template>
   <ng-template #footer>
-    <div class="bottom-0 left-0 right-0 grid grid-cols-5 gap-4">
+    <div class="bottom-0 left-0 right-0 grid grid-cols-5 gap-4 md:grid-rows-1 sm:grid-rows-2">
+      <h2 class="px-4 text-2xl font-normal col-span-2 sm:col-span-5 row-span-1">{{ product?.price }} ₴</h2>
       <p-inputnumber
         [(ngModel)]="inputValue"
         [showButtons]="true"

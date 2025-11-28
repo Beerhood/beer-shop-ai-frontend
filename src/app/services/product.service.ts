@@ -7,5 +7,5 @@ import { BaseService } from './base.service';
   providedIn: 'root',
 })
 export class ProductService extends BaseService<IProduct, IProductsApiResponse, IProductApiResponse> {
-  protected readonly apiUrl = `${environment.apiUrl}/product`;
+  protected readonly apiUrl = `${environment.apiUrl}/products`;
 }

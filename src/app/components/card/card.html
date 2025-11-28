@@ -2,7 +2,7 @@
   [style]="{
     position: 'relative',
     width: '25rem',
-    height: '35rem',
+    height: '27.5rem',
     overflow: 'hidden',
     display: 'block',
   }"
@@ -19,23 +19,22 @@
     {{ product.type.name + (product.country ? ', ' + product.country : '') }}
   </ng-template>
 
-  <div class="h-full overflow-hidden pb-20">
-    <p class="overflow-hidden leading-6 line-clamp-7">
-      {{ product.description }}
-    </p>
-  </div>
-
   <ng-template #footer>
-    <div class="absolute bottom-0 left-0 right-0 p-4 grid grid-cols-2 gap-4">
-      <p-button
-        label="Info"
-        severity="secondary"
-        class="flex-1"
-        [outlined]="true"
-        styleClass="w-full"
-        (onClick)="openProductModal()"
-      />
-      <p-button label="Add to cart" class="flex-1" styleClass="w-full" />
+    <div class="absolute bottom-0 left-0 right-0">
+      <h2 class="px-4 text-2xl font-normal">
+        {{ product.price }} ₴
+      </h2>
+      <div class="p-4 grid grid-cols-2 gap-4">
+        <p-button
+          label="Info"
+          severity="secondary"
+          class="flex-1"
+          [outlined]="true"
+          styleClass="w-full"
+          (onClick)="openProductModal()"
+        />
+        <p-button label="Add to cart" class="flex-1" styleClass="w-full" />
+      </div>
     </div>
   </ng-template>
 </p-card>
