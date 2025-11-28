@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, signal } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Dialog } from 'primeng/dialog';
-import { IProduct } from 'src/app/models';
+import { Product } from 'src/app/models';
 import { ButtonModule } from 'primeng/button';
 import { InputNumber } from 'primeng/inputnumber';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +31,7 @@ import { DividerModule } from 'primeng/divider';
 })
 export class ProductModal implements OnChanges {
   @Input() visible: boolean = true;
-  @Input() product: IProduct | null;
+  @Input() product: Product | null;
 
   inputValue: number = 0;
   productDetails = signal<[string, string | number][]>([]);

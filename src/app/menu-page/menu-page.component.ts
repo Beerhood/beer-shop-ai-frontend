@@ -1,7 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Card } from '../components/card/card';
-import * as MOCK from 'src/app/models/products.mock.json';
-import { ApiError, IProduct, IProductApiResponse, IProductsApiResponse } from '../models';
+import { ApiError, Product, ProductApiResponse, ProductsApiResponse } from '../models';
 import { ProductService } from '../services/product.service';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,9 +17,9 @@ import { firstValueFrom } from 'rxjs';
 export class MenuPage implements OnInit {
   first: number = 0;
   rows: number = 3;
-  products = signal<IProduct[]>([]);
+  products = signal<Product[]>([]);
   dialogVisible = false;
-  selectedProduct = signal<IProduct | null>(null);
+  selectedProduct = signal<Product | null>(null);
   constructor(
     private productService: ProductService,
     private snackBar: SnackbarService,
@@ -30,7 +29,7 @@ export class MenuPage implements OnInit {
 
   ngOnInit(): void {
     this.getProducts().subscribe({
-      next: (response: IProductsApiResponse) => {
+      next: (response: ProductsApiResponse) => {
         this.products.set(response.items);
       },
       error: (error: ApiError) => {
@@ -52,9 +51,9 @@ export class MenuPage implements OnInit {
 
   async openProductById(id: string): Promise<void> {
     try {
-      const response: IProductApiResponse = await firstValueFrom(this.getProductById(id));
+      const response: ProductApiResponse = await firstValueFrom(this.getProductById(id));
 
-      const product = response as IProduct;
+      const product = response as Product;
 
       if (!product) {
         this.dialogVisible = false;

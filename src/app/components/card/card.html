@@ -22,7 +22,7 @@
   <ng-template #footer>
     <div class="absolute bottom-0 left-0 right-0">
       <h2 class="px-4 text-2xl font-normal">
-        {{ product.price }} ₴
+        {{ product.price.toFixed(2) }} ₴
       </h2>
       <div class="p-4 grid grid-cols-2 gap-4">
         <p-button
