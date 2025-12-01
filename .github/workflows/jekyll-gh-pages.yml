@@ -26,7 +26,7 @@ jobs:
       - run: npm run build -- --base-href=/beer-shop-ai-frontend/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/browser
+          path: dist/beer-shop-ai-frontend/browser
 
   deploy:
     needs: build
