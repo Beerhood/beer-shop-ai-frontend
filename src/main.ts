@@ -7,7 +7,7 @@ import {
   provideZonelessChangeDetection,
 } from '@angular/core';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimations, provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -30,8 +30,8 @@ bootstrapApplication(AppComponent, {
       theme: {
         preset: AmberPreset,
         options: {
-            darkModeSelector: '.dark-theme' 
-        }
+          darkModeSelector: '.dark-theme',
+        },
       },
     }),
     provideRouter(routes),

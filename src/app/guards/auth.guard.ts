@@ -3,10 +3,11 @@ import { CanActivateFn, Router } from '@angular/router';
 import { Observable, take, map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
-const authService = inject(AuthService);
-const router = inject(Router);
 function checkAuth(requireAuth: boolean): Observable<boolean> {
-  const redirectUrl = requireAuth ? '/auth/login' : '/vacancy';
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  
+  const redirectUrl = requireAuth ? '/auth' : '/home';
   return authService.user$.pipe(
     take(1),
     map((user) => {

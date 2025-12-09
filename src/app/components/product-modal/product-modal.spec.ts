@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductModal } from './product-modal';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 describe('ProductModal', () => {
   let component: ProductModal;
@@ -8,9 +10,9 @@ describe('ProductModal', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductModal]
-    })
-    .compileComponents();
+      imports: [ProductModal],
+      providers: [provideAnimations(), provideAnimationsAsync()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProductModal);
     component = fixture.componentInstance;

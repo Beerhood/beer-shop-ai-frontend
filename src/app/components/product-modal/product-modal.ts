@@ -38,7 +38,6 @@ export class ProductModal implements OnChanges {
 
   constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
   ) {}
   ngOnChanges() {
     if (this.product) {
