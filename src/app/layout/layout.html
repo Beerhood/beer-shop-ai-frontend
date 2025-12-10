@@ -16,12 +16,17 @@
           <a href="/#/order">
             <p-button icon="pi pi-shopping-cart" variant="outlined" severity="contrast" />
           </a>
-          <p-avatar
-            [label]="userAvatar()"
-            class="mr-2"
-            size="large"
-            [style]="{ 'background-color': 'var(--p-surface-400)', color: 'var(--p-primary-100)' }"
-          />
+          <a href="/#/auth">
+            <p-avatar
+              [label]="userAvatar()"
+              class="mr-2"
+              size="large"
+              [style]="{
+                'background-color': 'var(--p-surface-400)',
+                color: 'var(--p-primary-100)',
+              }"
+            />
+          </a>
         </div>
       </ng-template>
     </p-menubar>

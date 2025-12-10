@@ -7,5 +7,5 @@ import { BaseService } from './base.service';
   providedIn: 'root',
 })
 export class OrderService extends BaseService<Order, OrdersApiResponse, OrderApiResponse> {
-  protected readonly apiUrl = `${environment.apiUrl}/order`;
+  protected readonly apiUrl = `${environment.apiUrl}/orders`;
 }

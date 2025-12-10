@@ -30,6 +30,6 @@ export interface ProductApiResponse extends Product {
 }
 
 export interface OrderItem {
-  itemId: string;
+  item: string;
   count: number;
 }

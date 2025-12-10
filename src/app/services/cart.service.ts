@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiError, OrderItem, ProductsApiResponse } from '../models';
+import { OrderItem, ProductsApiResponse } from '../models';
 import { ProductService } from './product.service';
-import { SnackbarService } from './snackbar.service';
+import { firstValueFrom } from 'rxjs';
 
 const CART_KEY = 'beerhood_cart';
 
@@ -11,10 +11,7 @@ const CART_KEY = 'beerhood_cart';
 export class CartService {
   private items: OrderItem[] = [];
 
-  constructor(
-    private productService: ProductService,
-    private snackBar: SnackbarService,
-  ) {
+  constructor(private productService: ProductService) {
     this.loadCart();
   }
 
@@ -23,7 +20,7 @@ export class CartService {
   }
 
   addToCart(item: OrderItem): void {
-    const existingItem = this.items.find((cartItem) => cartItem.itemId === item.itemId);
+    const existingItem = this.items.find((cartItem) => cartItem.item === item.item);
     if (existingItem) {
       existingItem.count += item.count;
     } else {
@@ -33,7 +30,7 @@ export class CartService {
   }
 
   removeFromCart(productId: string): void {
-    this.items = this.items.filter((item) => item.itemId !== productId);
+    this.items = this.items.filter((i) => i.item !== productId);
     this.syncCart();
   }
 
@@ -53,23 +50,25 @@ export class CartService {
     this.syncCart();
   }
 
-  getTotalPrice(): number {
+  async getTotalPrice(): Promise<number> {
     let totalPrice = 0;
-    const itemIds = this.items.map((item) => item.itemId);
-    this.productService.getList({ filter: { itemIds } }).subscribe({
-      next: (response: ProductsApiResponse) => {
-        response.items.forEach((product) => {
-          const cartItem = this.items.find((item) => item.itemId === product._id);
-          if (cartItem) {
-            totalPrice += product.price * cartItem.count;
-          }
-        });
-      },
-      error: (error: ApiError) => {
-        this.snackBar.showError(error.statusCode + ': ' + error.message);
-        console.error(error);
-      },
-    });
+    const items = this.items.map((item) => item.item);
+
+    try {
+      const response: ProductsApiResponse = await firstValueFrom(
+        this.productService.getList({ filter: { _id: { $in: items } } }),
+      );
+
+      response.items.forEach((product) => {
+        const cartItem = this.items.find((i) => i.item === product._id);
+        if (cartItem) {
+          totalPrice += product.price * cartItem.count;
+        }
+      });
+    } catch (error: unknown) {
+      console.error(error);
+    }
+
     return totalPrice;
   }
 }
