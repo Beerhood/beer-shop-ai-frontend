@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, signal } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Dialog } from 'primeng/dialog';
 import { Product } from 'src/app/models';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +11,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { TableModule } from 'primeng/table';
 import { ChipModule } from 'primeng/chip';
 import { DividerModule } from 'primeng/divider';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-product-modal',
@@ -38,15 +39,23 @@ export class ProductModal implements OnChanges {
 
   constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
+    private readonly cartService: CartService,
   ) {}
+
   ngOnChanges() {
     if (this.product) {
       this.productDetails.set(Object.entries(this.product.details));
     }
   }
+
   onCloseDialog() {
     this.visible = false;
     this.router.navigate(['menu']);
+  }
+
+  AddToCart() {
+    if (this.product) {
+      this.cartService.addToCart({ itemId: this.product._id, count: this.inputValue });
+    }
   }
 }

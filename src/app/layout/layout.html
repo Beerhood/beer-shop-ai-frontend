@@ -13,10 +13,15 @@
             severity="contrast"
             (onClick)="toggleDarkMode()"
           />
-          <a href="/order">
+          <a href="/#/order">
             <p-button icon="pi pi-shopping-cart" variant="outlined" severity="contrast" />
           </a>
-          <p-avatar [label]="userAvatar()" class="mr-2" size="large" [style]="{ 'background-color': 'var(--p-surface-400)', color: 'var(--p-primary-100)' }" />
+          <p-avatar
+            [label]="userAvatar()"
+            class="mr-2"
+            size="large"
+            [style]="{ 'background-color': 'var(--p-surface-400)', color: 'var(--p-primary-100)' }"
+          />
         </div>
       </ng-template>
     </p-menubar>
