@@ -1,7 +1,7 @@
-import {inject} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /**
  * List parameters (filter, sort, limit, skip)
@@ -43,10 +43,10 @@ export function transformDates<T>(obj: any): T {
   }
 
   if (Array.isArray(obj)) {
-    return obj.map(item => transformDates(item)) as T;
+    return obj.map((item) => transformDates(item)) as T;
   }
 
-  const transformed = {...obj};
+  const transformed = { ...obj };
 
   const dateFields = ['createdAt', 'updatedAt', 'expiresAt', 'birthDate'];
 
@@ -71,9 +71,9 @@ export function transformDates<T>(obj: any): T {
 
 /**
  * Base service with generic CRUD operations
- * @template T - Entity type 
- * @template ListResponse - List API response type 
- * @template SingleResponse - Single item API response type 
+ * @template T - Entity type
+ * @template ListResponse - List API response type
+ * @template SingleResponse - Single item API response type
  */
 export abstract class BaseService<T, ListResponse, SingleResponse> {
   protected readonly http = inject(HttpClient);
@@ -88,8 +88,8 @@ export abstract class BaseService<T, ListResponse, SingleResponse> {
     const httpParams = this.getHttpParams(params || {});
 
     return this.http
-      .get<any>(this.apiUrl, {params: httpParams})
-      .pipe(map(response => transformDates<ListResponse>(response)));
+      .get<any>(this.apiUrl, { params: httpParams })
+      .pipe(map((response) => transformDates<ListResponse>(response)));
   }
 
   /**
@@ -100,7 +100,7 @@ export abstract class BaseService<T, ListResponse, SingleResponse> {
   getById(id: string): Observable<SingleResponse> {
     return this.http
       .get<any>(`${this.apiUrl}/${id}`)
-      .pipe(map(response => transformDates<SingleResponse>(response)));
+      .pipe(map((response) => transformDates<SingleResponse>(response)));
   }
 
   /**
@@ -111,7 +111,7 @@ export abstract class BaseService<T, ListResponse, SingleResponse> {
   create(entity: Partial<T>): Observable<SingleResponse> {
     return this.http
       .post<any>(this.apiUrl, entity)
-      .pipe(map(response => transformDates<SingleResponse>(response)));
+      .pipe(map((response) => transformDates<SingleResponse>(response)));
   }
 
   /**
@@ -123,7 +123,7 @@ export abstract class BaseService<T, ListResponse, SingleResponse> {
   update(id: string, entity: Partial<T>): Observable<SingleResponse> {
     return this.http
       .patch<any>(`${this.apiUrl}/${id}`, entity)
-      .pipe(map(response => transformDates<SingleResponse>(response)));
+      .pipe(map((response) => transformDates<SingleResponse>(response)));
   }
 
   /**
@@ -135,7 +135,7 @@ export abstract class BaseService<T, ListResponse, SingleResponse> {
   rewrite(id: string, entity: T): Observable<SingleResponse> {
     return this.http
       .put<any>(`${this.apiUrl}/${id}`, entity)
-      .pipe(map(response => transformDates<SingleResponse>(response)));
+      .pipe(map((response) => transformDates<SingleResponse>(response)));
   }
 
   /**
@@ -146,7 +146,7 @@ export abstract class BaseService<T, ListResponse, SingleResponse> {
   delete(id: string): Observable<SingleResponse> {
     return this.http
       .delete<any>(`${this.apiUrl}/${id}`)
-      .pipe(map(response => transformDates<SingleResponse>(response)));
+      .pipe(map((response) => transformDates<SingleResponse>(response)));
   }
 
   protected getHttpParams(params: IListParams): HttpParams {
@@ -164,7 +164,7 @@ export abstract class BaseService<T, ListResponse, SingleResponse> {
       httpParams = httpParams.set('limit', params.limit.toString());
     }
 
-    if (params?.skip) {
+    if (params?.skip != undefined && params?.skip >= 0) {
       httpParams = httpParams.set('skip', params.skip.toString());
     }
 

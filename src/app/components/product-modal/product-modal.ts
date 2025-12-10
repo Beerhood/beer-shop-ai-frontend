@@ -55,7 +55,8 @@ export class ProductModal implements OnChanges {
 
   AddToCart() {
     if (this.product) {
-      this.cartService.addToCart({ itemId: this.product._id, count: this.inputValue });
+      this.cartService.addToCart({ item: this.product._id, count: this.inputValue });
     }
+    this.onCloseDialog();
   }
 }

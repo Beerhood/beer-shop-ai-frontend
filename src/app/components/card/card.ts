@@ -24,6 +24,6 @@ export class Card {
   }
 
   AddToCart() {
-    this.cartService.addToCart({ itemId: this.product._id, count: 1 });
+    this.cartService.addToCart({ item: this.product._id, count: 1 });
   }
 }

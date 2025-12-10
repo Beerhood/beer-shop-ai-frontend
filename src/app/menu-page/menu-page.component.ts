@@ -16,7 +16,7 @@ import { IListParams } from '../services';
   styleUrl: './menu-page.component.scss',
 })
 export class MenuPage implements OnInit {
-  first: number = 1;
+  first: number = 0;
   elements: number = 12;
   totalRecords: number;
   products = signal<Product[]>([]);
