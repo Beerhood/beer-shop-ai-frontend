@@ -28,3 +28,8 @@ export interface ProductApiResponse extends Product {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface OrderItem {
+  itemId: string;
+  count: number;
+}
