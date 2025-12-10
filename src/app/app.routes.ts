@@ -23,6 +23,10 @@ export const routes: Routes = [
     loadChildren: () => import('./order-page/order-page.routes'),
   },
   {
+    path: 'ai-chat',
+    loadChildren: () => import('./ai-chat/ai-chat.routes'),
+  },
+  {
     path: 'sorry',
     loadComponent: () => import('./sorry-page/sorry-page.component').then((c) => c.SorryPage),
   },
