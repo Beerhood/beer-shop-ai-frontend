@@ -48,7 +48,7 @@
                 [ngClass]="{
                   'bg-amber-500 text-white rounded-tr-none': msg.sender === 'user',
                   'text-color rounded-tl-none': msg.sender === 'ai' && !msg.isError,
-                  'bg-red-50 text-red-600 border border-red-200 rounded-tl-none': msg.isError,
+                  'text-red-600 border border-red-200 rounded-tl-none': msg.isError,
                 }"
               >
                 {{ msg.content }}

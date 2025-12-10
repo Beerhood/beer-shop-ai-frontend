@@ -10,17 +10,11 @@
     <p-paginator
       (onPageChange)="onPageChange($event)"
       [first]="first"
-<<<<<<< Updated upstream
       [rows]="elements"
       [totalRecords]="totalRecords"
       [rowsPerPageOptions]="[6, 12, 24]"
       [showCurrentPageReport]="true"
       [showPageLinks]="false"
-=======
-      [rows]="rows"
-      [totalRecords]="120"
-      [rowsPerPageOptions]="[3, 12, 24]"
->>>>>>> Stashed changes
     />
   </div>
   <app-product-modal [visible]="dialogVisible" [product]="selectedProduct()"> </app-product-modal>
