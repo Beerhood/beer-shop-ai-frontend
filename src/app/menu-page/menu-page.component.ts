@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductModal } from '../components/product-modal/product-modal';
 import { SnackbarService } from '../services/snackbar.service';
 import { firstValueFrom } from 'rxjs';
+import { IListParams } from '../services';
 
 @Component({
   selector: 'app-menu-page.component',
@@ -15,8 +16,9 @@ import { firstValueFrom } from 'rxjs';
   styleUrl: './menu-page.component.scss',
 })
 export class MenuPage implements OnInit {
-  first: number = 0;
-  rows: number = 3;
+  first: number = 1;
+  elements: number = 12;
+  totalRecords: number;
   products = signal<Product[]>([]);
   dialogVisible = false;
   selectedProduct = signal<Product | null>(null);
@@ -28,15 +30,7 @@ export class MenuPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getProducts().subscribe({
-      next: (response: ProductsApiResponse) => {
-        this.products.set(response.items);
-      },
-      error: (error: ApiError) => {
-        this.snackBar.showError(error.statusCode + ': ' + error.message);
-        console.error(error);
-      },
-    });
+    this.loadProducts();
 
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -76,14 +70,27 @@ export class MenuPage implements OnInit {
     }
   }
 
-  onPageChange(event: PaginatorState) {
-    this.first = event.first ?? 0;
-    this.rows = event.rows ?? 10;
+  loadProducts(): void {
+    this.getProducts({ limit: this.elements, skip: this.first }).subscribe({
+      next: (response: ProductsApiResponse) => {
+        this.products.set(response.items);
+        this.totalRecords = response.totalCount;
+      },
+      error: (error: ApiError) => {
+        this.snackBar.showError(error.statusCode + ': ' + error.message);
+        console.error(error);
+      },
+    });
   }
 
-  getProducts() {
-    return this.productService.getList();
-    //TODO: add pagination & filter field overloads
+  onPageChange(event: PaginatorState) {
+    event.first === 0 ? (this.first = event.first + 1) : (this.first = event.first as number);
+    this.elements = event.rows ?? 3;
+    this.loadProducts();
+  }
+
+  getProducts(params: IListParams) {
+    return this.productService.getList(params);
   }
 
   getProductById(id: string) {

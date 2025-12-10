@@ -8,11 +8,13 @@
   </div>
   <div class="card flex justify-center">
     <p-paginator
-    (onPageChange)="onPageChange($event)"
-    [first]="first"
-    [rows]="rows"
-    [totalRecords]="120"
-    [rowsPerPageOptions]="[3, 12, 24]"
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="elements"
+      [totalRecords]="totalRecords"
+      [rowsPerPageOptions]="[6, 12, 24]"
+      [showCurrentPageReport]="true"
+      [showPageLinks]="false"
     />
   </div>
   <app-product-modal [visible]="dialogVisible" [product]="selectedProduct()"> </app-product-modal>
