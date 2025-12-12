@@ -34,7 +34,7 @@ bootstrapApplication(AppComponent, {
         },
       },
     }),
-    provideRouter(routes, withHashLocation()),
+    provideRouter(routes),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,
