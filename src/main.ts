@@ -15,6 +15,7 @@ import { providePrimeNG } from 'primeng/config';
 import { routes } from './app/app.routes';
 import { HttpConfigInterceptor } from './app/interceptors/httpConfig.interceptor';
 import { AmberPreset } from './styles/presets/preset.amber';
+import { APP_BASE_HREF } from '@angular/common';
 
 if (environment.production) {
   enableProdMode();
@@ -34,7 +35,8 @@ bootstrapApplication(AppComponent, {
         },
       },
     }),
-    provideRouter(routes, withHashLocation()),
+    provideRouter(routes),
+    { provide: APP_BASE_HREF, useValue: '/beer-shop-ai-frontend/' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,

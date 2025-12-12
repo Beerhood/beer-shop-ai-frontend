@@ -52,9 +52,9 @@ export class OrderPage implements OnInit {
   async ngOnInit() {
     this.cart = this.cartService.getCartItems();
     this.orderForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      address: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z\s]+$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z\s]+$')]],
+      address: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9\s,.'-]+$")]],
     });
 
     this.getProductsList();
