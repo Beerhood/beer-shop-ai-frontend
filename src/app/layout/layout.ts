@@ -61,7 +61,7 @@ export class Layout implements OnInit {
       .subscribe(() => {
         const currentRoute = this.router.url.split('?')[0];
         const toolbarRoutes = Object.values(ToolbarRoutes);
-        const toolbarRoutesRexExp = new RegExp(`/${toolbarRoutes.join('|')}/*`);
+        const toolbarRoutesRexExp = new RegExp(`^/(${toolbarRoutes.join('|')})(/|$)`);
         this.showToolbar = toolbarRoutesRexExp.test(currentRoute);
       });
   }
