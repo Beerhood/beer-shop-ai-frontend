@@ -1,0 +1,21 @@
+:host ::ng-deep {
+  .p-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .p-card-body {
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .p-card-content {
+    padding: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}

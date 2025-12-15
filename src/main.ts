@@ -9,7 +9,7 @@ import {
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimations, provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app/app.routes';
@@ -34,7 +34,7 @@ bootstrapApplication(AppComponent, {
         },
       },
     }),
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpConfigInterceptor,

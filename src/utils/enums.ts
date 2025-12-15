@@ -18,5 +18,6 @@ export enum OrderStatuses {
 export enum ToolbarRoutes {
   HOME = 'home',
   MENU = 'menu',
-  ORDER = 'order'
+  ORDER = 'order',
+  AI_CHAT = 'ai-chat',
 }

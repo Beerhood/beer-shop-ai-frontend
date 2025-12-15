@@ -78,7 +78,12 @@
         </ng-template>
       </p-inputnumber>
 
-      <p-button label="Add to cart" class="flex-1 col-span-2" styleClass="w-full" />
+      <p-button
+        label="Add to cart"
+        class="flex-1 col-span-2"
+        styleClass="w-full"
+        (onClick)="AddToCart()"
+      />
     </div>
   </ng-template>
 </p-dialog>

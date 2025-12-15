@@ -1,9 +1,9 @@
-import { User, Product, OrderStatuses } from './';
+import { User, OrderStatuses, OrderItem } from './';
 
 export interface Order {
   _id: string;
   user: User;
-  products: Product[];
+  products: OrderItem[];
   address: string;
   totalPrice: number;
   status: OrderStatuses;
